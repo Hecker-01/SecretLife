@@ -1,4 +1,4 @@
 name: SecretLife
-version: '${project.version}'
-main: net.heckerdev.secretlifeplugin.SecretLife
+version: '0.1'
+main: net.heckerdev.secretlife.SecretLife
 api-version: '1.20'
