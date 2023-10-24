@@ -8,6 +8,6 @@ import org.bukkit.entity.Player;
 
 public class CompletedButton {
     public static void Pressed(Player player, Block block) {
-        player.sendMessage(Component.text("You clicked The Completed Button!").color(Color.GREEN).decoration(TextDecoration.BOLD, true));
+        player.sendMessage(Component.text("✔ You clicked The Completed Button!").color(Color.GREEN).decoration(TextDecoration.BOLD, true));
     }
 }

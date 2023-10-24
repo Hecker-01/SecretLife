@@ -11,3 +11,4 @@ public class FailedButton {
         player.sendMessage(Component.text("✔ You clicked The Failed Button!").color(Color.DARK_RED).decoration(TextDecoration.BOLD, true));
     }
 }
+//❌❌
