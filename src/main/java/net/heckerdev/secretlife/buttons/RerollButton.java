@@ -8,6 +8,6 @@ import org.bukkit.entity.Player;
 
 public class RerollButton {
     public static void Pressed(Player player, Block block) {
-        player.sendMessage(Component.text("✔ You clicked The Re-roll Button!").color(Color.DARK_GREEN).decoration(TextDecoration.BOLD, true));
+        player.sendMessage(Component.text("\uD83D\uDD01").color(Color.DARK_GREEN).decoration(TextDecoration.BOLD, false).append(Component.text(" You clicked The Reroll Button!").color(Color.DARK_GREEN).decoration(TextDecoration.BOLD, true)));
     }
 }

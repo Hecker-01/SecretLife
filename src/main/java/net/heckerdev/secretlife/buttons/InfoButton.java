@@ -8,6 +8,6 @@ import org.bukkit.entity.Player;
 
 public class InfoButton {
     public static void Pressed(Player player, Block block) {
-        player.sendMessage(Component.text("✔ You clicked The Info Button!").color(Color.AQUA).decoration(TextDecoration.BOLD, true));
+        player.sendMessage(Component.text("ⓘ You clicked The Info Button!").color(Color.BLUE).decoration(TextDecoration.BOLD, true));
     }
 }
