@@ -1,7 +1,7 @@
 package net.heckerdev.secretlife.buttons;
 
-import net.heckerdev.secretlife.util.ParticleColor;
-import net.heckerdev.secretlife.util.TextColor;
+import net.heckerdev.secretlife.utils.ParticleColor;
+import net.heckerdev.secretlife.utils.TextColor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Particle;
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 
 public class RerollButton {
     public static void Pressed(Player player, Block block) {
-        // Send message to player
-        player.sendMessage(Component.text("\uD83D\uDD01").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, false).append(Component.text(" You clicked The Reroll Button!").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, true)));
+        // Message has already been sent, see RerollButton() in PlayerInteractEventListener.java
+        // This is because I can't access the configuration file in here.
 
         // Spawn particles
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_GREEN, 1.5F);

@@ -1,7 +1,7 @@
 package net.heckerdev.secretlife.buttons;
 
-import net.heckerdev.secretlife.util.ParticleColor;
-import net.heckerdev.secretlife.util.TextColor;
+import net.heckerdev.secretlife.utils.ParticleColor;
+import net.heckerdev.secretlife.utils.TextColor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Particle;
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 
 public class InfoButton {
     public static void Pressed(Player player, Block block) {
-        // Send message to player
-        player.sendMessage(Component.text("ⓘ You clicked The Info Button!").color(TextColor.BLUE).decoration(TextDecoration.BOLD, true));
+        // Message has already been sent, see InfoButton() in PlayerInteractEventListener.java
+        // This is because I can't access the configuration file in here.
 
         // Spawn particles
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.BLUE, 1.5F);

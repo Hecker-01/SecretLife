@@ -1,4 +1,4 @@
-package net.heckerdev.secretlife.util;
+package net.heckerdev.secretlife.utils;
 
 
 public class TextColor {

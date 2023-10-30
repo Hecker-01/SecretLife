@@ -2,22 +2,26 @@ package net.heckerdev.secretlife;
 
 import net.heckerdev.secretlife.commands.*;
 import net.heckerdev.secretlife.events.*;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.milkbowl.vault.permission.Permission;
 
 import co.aikar.commands.PaperCommandManager;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 public final class SecretLife extends JavaPlugin {
 
-    private static Permission perms = null;
+    private static Configuration config;
 
-    private static FileConfiguration config = null;
+    private static Permission perms = null;
 
     @Override
     public void onEnable() {
@@ -27,7 +31,7 @@ public final class SecretLife extends JavaPlugin {
         setupPermissions();
         setupCommands();
         getLogger().info("Successfully loaded SecretLife!");
-
+        getLogger().info(LegacyComponentSerializer.legacy('&').deserialize("&atest").toString());
     }
 
     @Override
@@ -64,7 +68,7 @@ public final class SecretLife extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new BlockPlaceEventListener(), this);
         }
         */
-        Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
     }
 
     public static Permission getPermissions() {

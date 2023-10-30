@@ -1,4 +1,4 @@
-package net.heckerdev.secretlife.util;
+package net.heckerdev.secretlife.utils;
 
 public class ParticleColor {
     public static final org.bukkit.Color BLACK = org.bukkit.Color.fromRGB(0, 0, 0);

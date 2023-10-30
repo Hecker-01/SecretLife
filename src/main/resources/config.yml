@@ -1,3 +1,9 @@
 # Config file for SecretLife
+messages:
+  completed-button: "&a&l✔ You clicked The Completed Button!"
+  failed-button: "&4&l❌ You clicked The Failed Button!"
+  info-button: "&9&lⓘ You clicked The Info Button!"
+  reroll-button: "&2🔁&l You clicked The Reroll Button!"
 
-config-version: 1.0
+# File version (do NOT edit)
+file-version: 1
