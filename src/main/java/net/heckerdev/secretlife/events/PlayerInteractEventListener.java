@@ -23,7 +23,7 @@ import java.util.UUID;
 public class PlayerInteractEventListener implements Listener {
 
     public void CompletedButton(Player player, Block block) {
-        String CompletedMessage = this.plugin.getConfig().getString("messages.completed-button");
+        String CompletedMessage = this.plugin.getConfig().getString("messages.completed-chat");
 
         // Send message to player when the completed button is clicked.
         // player.sendMessage(Component.text("✔ You clicked The Completed Button!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true));
@@ -37,7 +37,7 @@ public class PlayerInteractEventListener implements Listener {
     }
 
     public void FailedButton(Player player, Block block) {
-        String FailedMessage = this.plugin.getConfig().getString("messages.failed-button");
+        String FailedMessage = this.plugin.getConfig().getString("messages.failed-chat");
 
         // Send message to player when the failed button is clicked.
         // player.sendMessage(Component.text("❌ You clicked The Failed Button!").color(TextColor.DARK_RED).decoration(TextDecoration.BOLD, true));
@@ -51,7 +51,7 @@ public class PlayerInteractEventListener implements Listener {
     }
 
     public void InfoButton(Player player, Block block) {
-        String InfoMessage = this.plugin.getConfig().getString("messages.info-button");
+        String InfoMessage = this.plugin.getConfig().getString("messages.info-chat");
 
         // Send message to player when the info button is clicked.
         // player.sendMessage(Component.text("ⓘ You clicked The Info Button!").color(TextColor.BLUE).decoration(TextDecoration.BOLD, true));
@@ -65,7 +65,7 @@ public class PlayerInteractEventListener implements Listener {
     }
 
     public  void RerollButton(Player player, Block block) {
-        String RerollMessage = this.plugin.getConfig().getString("messages.reroll-button");
+        String RerollMessage = this.plugin.getConfig().getString("messages.reroll-chat");
 
         // Send message to player when the reroll button is clicked.
         // player.sendMessage(Component.text("\uD83D\uDD01").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, false).append(Component.text(" You clicked The Reroll Button!").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, true)));

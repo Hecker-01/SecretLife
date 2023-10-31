@@ -33,7 +33,7 @@ public final class SecretLife extends JavaPlugin {
     private void setupCommands() {
         // Registering commands.
         PaperCommandManager manager = new PaperCommandManager(this);
-        manager.registerCommand(new TestCommand(plugin));
+        manager.registerCommand(new TestCommand(this));
     }
 
     private boolean setupPermissions() {

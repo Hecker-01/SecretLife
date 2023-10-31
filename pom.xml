@@ -61,7 +61,8 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>C:\Users\jesse\Desktop\Secret Life Testserver\plugins</outputDirectory>
+                    <outputDirectory>/Users/jesse/Desktop/SecretLifeTestServer/plugins</outputDirectory>
+                    <!--<outputDirectory>C:\Users\jesse\Desktop\Secret Life Testserver\plugins</outputDirectory>-->
                 </configuration>
             </plugin>
         </plugins>

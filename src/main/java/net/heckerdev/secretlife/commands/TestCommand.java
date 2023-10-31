@@ -21,7 +21,7 @@ public class TestCommand extends BaseCommand {
     public void onDefault(@NotNull CommandSender sender, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("secretlife.command.spawn")) {
+            if (player.hasPermission("secretlife.command.test")) {
                 player.sendMessage("test complete!");
             } else {
                 String CompletedMessage = this.plugin.getConfig().getString("messages.command-no-permission");
