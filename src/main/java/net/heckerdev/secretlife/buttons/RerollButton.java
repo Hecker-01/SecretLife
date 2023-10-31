@@ -1,9 +1,6 @@
 package net.heckerdev.secretlife.buttons;
 
 import net.heckerdev.secretlife.utils.ParticleColor;
-import net.heckerdev.secretlife.utils.TextColor;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

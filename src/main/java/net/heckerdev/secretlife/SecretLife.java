@@ -1,25 +1,15 @@
 package net.heckerdev.secretlife;
 
-import net.heckerdev.secretlife.commands.*;
-import net.heckerdev.secretlife.events.*;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
+import co.aikar.commands.PaperCommandManager;
+import net.heckerdev.secretlife.commands.TestCommand;
+import net.heckerdev.secretlife.events.PlayerInteractEventListener;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.milkbowl.vault.permission.Permission;
-
-import co.aikar.commands.PaperCommandManager;
-
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 public final class SecretLife extends JavaPlugin {
-
-    private static Configuration config;
 
     private static Permission perms = null;
 
@@ -43,7 +33,7 @@ public final class SecretLife extends JavaPlugin {
     private void setupCommands() {
         // Registering commands.
         PaperCommandManager manager = new PaperCommandManager(this);
-        manager.registerCommand(new TestCommand());
+        manager.registerCommand(new TestCommand(plugin));
     }
 
     private boolean setupPermissions() {
