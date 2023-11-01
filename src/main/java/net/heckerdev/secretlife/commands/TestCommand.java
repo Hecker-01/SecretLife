@@ -13,7 +13,6 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Attr;
 
 @CommandAlias("test")
 @Description("test")
@@ -25,6 +24,9 @@ public class TestCommand extends BaseCommand {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission("secretlife.command.test")) {
+                AttributeInstance health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+                double currentHealth = health.getValue();
+                health.setBaseValue(currentHealth - 1);
                 player.sendMessage("test complete!");
             } else {
                 String CompletedMessage = this.plugin.getConfig().getString("messages.command-no-permission");

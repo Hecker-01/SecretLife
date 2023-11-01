@@ -1,15 +1,15 @@
 package net.heckerdev.secretlife.events;
 
 import net.heckerdev.secretlife.SecretLife;
-import net.heckerdev.secretlife.utils.ParticleColor;
+import net.heckerdev.secretlife.buttons.CompletedButton;
+import net.heckerdev.secretlife.buttons.FailedButton;
+import net.heckerdev.secretlife.buttons.InfoButton;
+import net.heckerdev.secretlife.buttons.RerollButton;
 import net.heckerdev.secretlife.utils.TextColor;
-import net.heckerdev.secretlife.buttons.*;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -92,7 +92,7 @@ public class PlayerInteractEventListener implements Listener {
             // Completed Button
             if (location.getBlockX() == 2 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
 
-                long cooldownTime1 = 1000; // IN MILLISECONDS
+                long cooldownTime1 = 2000; // IN MILLISECONDS
 
                 if (!this.cooldown1.containsKey(player.getUniqueId()) || ((this.cooldown1.get(player.getUniqueId())) + cooldownTime1) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown1.put(player.getUniqueId(), System.currentTimeMillis());
@@ -101,7 +101,7 @@ public class PlayerInteractEventListener implements Listener {
             // Re-roll Button
             } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
 
-                long cooldownTime2 = 1000; // IN MILLISECONDS
+                long cooldownTime2 = 2000; // IN MILLISECONDS
 
                 if (!this.cooldown2.containsKey(player.getUniqueId()) || ((this.cooldown2.get(player.getUniqueId())) + cooldownTime2) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown2.put(player.getUniqueId(), System.currentTimeMillis());
@@ -110,7 +110,7 @@ public class PlayerInteractEventListener implements Listener {
             // Failed Button
             } else if (location.getBlockX() == -2 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
 
-                long cooldownTime3 = 1000; // IN MILLISECONDS
+                long cooldownTime3 = 2000; // IN MILLISECONDS
 
                 if (!this.cooldown3.containsKey(player.getUniqueId()) || ((this.cooldown3.get(player.getUniqueId())) + cooldownTime3) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown3.put(player.getUniqueId(), System.currentTimeMillis());
@@ -119,7 +119,7 @@ public class PlayerInteractEventListener implements Listener {
             // Info Button
             } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 7 && block.getType().toString().contains("BUTTON")) {
 
-                long cooldownTime4 = 1000; // IN MILLISECONDS
+                long cooldownTime4 = 2000; // IN MILLISECONDS
 
                 if (!this.cooldown4.containsKey(player.getUniqueId()) || ((this.cooldown4.get(player.getUniqueId())) + cooldownTime4) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown4.put(player.getUniqueId(), System.currentTimeMillis());

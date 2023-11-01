@@ -1,10 +1,8 @@
 package net.heckerdev.secretlife;
 
 import co.aikar.commands.PaperCommandManager;
-import net.heckerdev.secretlife.commands.TestCommand;
-import net.heckerdev.secretlife.events.DamageEventListener;
-import net.heckerdev.secretlife.events.PlayerInteractEventListener;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.heckerdev.secretlife.commands.*;
+import net.heckerdev.secretlife.events.*;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -34,6 +32,7 @@ public final class SecretLife extends JavaPlugin {
         // Registering commands.
         PaperCommandManager manager= new PaperCommandManager(this);
         manager.registerCommand(new TestCommand(this));
+        manager.registerCommand(new SetupCommand(this));
     }
 
     private boolean setupPermissions() {
@@ -52,14 +51,8 @@ public final class SecretLife extends JavaPlugin {
 
     private void setupListeners() {
         // Registering listeners.
-        /*
-        boolean placeMessage = getConfig().getBoolean("Listeners.PlaceMessage");
-        if (placeMessage) {
-            Bukkit.getPluginManager().registerEvents(new BlockPlaceEventListener(), this);
-        }
-        */
         Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new DamageEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityDamageEventListener(), this);
     }
 
     public static Permission getPermissions() {
