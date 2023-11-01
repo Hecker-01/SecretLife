@@ -2,6 +2,7 @@ package net.heckerdev.secretlife;
 
 import co.aikar.commands.PaperCommandManager;
 import net.heckerdev.secretlife.commands.TestCommand;
+import net.heckerdev.secretlife.events.DamageEventListener;
 import net.heckerdev.secretlife.events.PlayerInteractEventListener;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.milkbowl.vault.permission.Permission;
@@ -21,7 +22,6 @@ public final class SecretLife extends JavaPlugin {
         setupPermissions();
         setupCommands();
         getLogger().info("Successfully loaded SecretLife!");
-        getLogger().info(LegacyComponentSerializer.legacy('&').deserialize("&atest").toString());
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class SecretLife extends JavaPlugin {
 
     private void setupCommands() {
         // Registering commands.
-        PaperCommandManager manager = new PaperCommandManager(this);
+        PaperCommandManager manager= new PaperCommandManager(this);
         manager.registerCommand(new TestCommand(this));
     }
 
@@ -59,6 +59,7 @@ public final class SecretLife extends JavaPlugin {
         }
         */
         Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new DamageEventListener(), this);
     }
 
     public static Permission getPermissions() {
