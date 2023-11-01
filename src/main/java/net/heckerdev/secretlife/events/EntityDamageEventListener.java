@@ -17,7 +17,6 @@ public class EntityDamageEventListener implements Listener{
             double currentHealth = health.getValue();
             double finalDamage = event.getFinalDamage();
             health.setBaseValue(currentHealth - finalDamage);
-            player.sendMessage("damag!");
         }
     }
 }

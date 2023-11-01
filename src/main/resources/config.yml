@@ -1,23 +1,23 @@
 # Config file for SecretLife
 messages:
   # Completed messages
-  completed-chat: "&a&l✔ You clicked The Completed Button!"
-  completed-title: "&a&l✔ Completed"
-  completed-subtitle: "&a&lYou clicked The Completed Button!"
+  completed-chat: "&a&l✔&r&a You clicked The Completed Button!"
+  completed-title: "&a&l✔&r&a Completed"
+  completed-subtitle: "&a&You clicked The Completed Button!"
   # Failed messages
-  failed-chat: "&4&l❌ You clicked The Failed Button!"
-  failed-title: "&4&l❌ Failed"
-  failed-subtitle: "&4&lYou clicked The Failed Button!"
+  failed-chat: "&4&l❌&r&4 You clicked The Failed Button!"
+  failed-title: "&4&l❌&r&4 Failed"
+  failed-subtitle: "&4&You clicked The Failed Button!"
   # Info messages
-  info-chat: "&9&lⓘ You clicked The Info Button!"
-  info-title: "&9&lⓘ Info"
-  info-subtitle: "&9&lYou clicked The Info Button!"
+  info-chat: "&9&lⓘ&r&9 You clicked The Info Button!"
+  info-title: "&9&lⓘ&r&9 Info"
+  info-subtitle: "&9You clicked The Info Button!"
   # Reroll messages
-  reroll-chat: "&2🔁&l You clicked The Reroll Button!"
-  reroll-title: "&2🔁&l Reroll"
-  reroll-subtitle: "&2&lYou clicked The Reroll Button!"
+  reroll-chat: "&2🔁 You clicked The Reroll Button!"
+  reroll-title: "&2🔁 Reroll"
+  reroll-subtitle: "&2You clicked The Reroll Button!"
   # Command messages
-  command-no-permission: "&c⚠&l You do not have permission to use this command!"
+  command-no-permission: "&c⚠ You do not have permission to use this command!"
 
 # File version (do NOT edit)
-file-version: 1
+file-version: 1.1

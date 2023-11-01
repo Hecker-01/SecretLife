@@ -30,7 +30,7 @@ public class PlayerInteractEventListener implements Listener {
         if (CompletedMessage != null) {
             player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(CompletedMessage));
         } else {
-            player.sendMessage(Component.text("❌ Completed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, true));
+            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Completed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
         }
         // The other stuff is in the file below.
         CompletedButton.Pressed(player, block);
@@ -44,7 +44,7 @@ public class PlayerInteractEventListener implements Listener {
         if (FailedMessage != null) {
             player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(FailedMessage));
         } else {
-            player.sendMessage(Component.text("❌ Failed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, true));
+            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Failed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
         }
         // The other stuff is in the file below.
         FailedButton.Pressed(player, block);
@@ -58,7 +58,7 @@ public class PlayerInteractEventListener implements Listener {
         if (InfoMessage != null) {
             player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(InfoMessage));
         } else {
-            player.sendMessage(Component.text("❌ Info message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, true));
+            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Info message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
         }
         // The other stuff is in the file below.
         InfoButton.Pressed(player, block);
@@ -72,7 +72,7 @@ public class PlayerInteractEventListener implements Listener {
         if (RerollMessage != null) {
             player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(RerollMessage));
         } else {
-            player.sendMessage(Component.text("❌ Reroll message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, true));
+            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Reroll message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
         }
         // The other stuff is in the file below.
         RerollButton.Pressed(player, block);

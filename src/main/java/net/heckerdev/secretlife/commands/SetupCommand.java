@@ -45,7 +45,7 @@ public class SetupCommand extends BaseCommand {
     }
 
     @Subcommand("only")
-    @Syntax("only")
+    @Syntax("only <player>")
     @CommandCompletion("@players")
     public void onOnly(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
@@ -60,7 +60,7 @@ public class SetupCommand extends BaseCommand {
                         player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" " + args[0] + " is not a valid player! - Make sure the player is online!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)).append(Component.text(" Usage: /setup only <player>").color(TextColor.GRAY).decoration(TextDecoration.BOLD, false)));
                     }
                 } else {
-                    player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Usage: /setup only <player>").color(TextColor.GRAY).decoration(TextDecoration.BOLD, false)));
+                    player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Usage: /setup only <player>").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
                 }
             } else {
                 noPerms(player);
@@ -69,6 +69,12 @@ public class SetupCommand extends BaseCommand {
             sender.sendMessage(NamedTextColor.DARK_RED + "You can only execute this as a player!");
         }
     }
+
+    @HelpCommand
+    public void doHelp(CommandSender sender) {
+        sender.sendMessage(Component.text("Usage: /setup everyone OR only").color(TextColor.GRAY));
+    }
+
     private void setupPlayer(Player target) {
         AttributeInstance health = Objects.requireNonNull(target.getAttribute(Attribute.GENERIC_MAX_HEALTH));
         health.setBaseValue(60);
@@ -76,10 +82,10 @@ public class SetupCommand extends BaseCommand {
         target.sendMessage(Component.text("✔").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true).append(Component.text(" You've been set up and are ready to go!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, false)));
     }
     private void noPerms(Player player) {
-        String CompletedMessage = this.plugin.getConfig().getString("messages.command-no-permission");
+        String noPermsMessage = this.plugin.getConfig().getString("messages.command-no-permission");
 
-        if (CompletedMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(CompletedMessage));
+        if (noPermsMessage != null) {
+            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(noPermsMessage));
         } else {
             player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Command messages aren't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
         }
