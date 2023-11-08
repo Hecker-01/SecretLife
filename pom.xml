@@ -39,11 +39,11 @@
                     <relocations>
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
-                            <shadedPattern>SecretLife.acf</shadedPattern> <!-- Replace this -->
+                            <shadedPattern>SecretLife.acf</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>co.aikar.locales</pattern>
-                            <shadedPattern>SecretLife.locales</shadedPattern> <!-- Replace this -->
+                            <shadedPattern>SecretLife.locales</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

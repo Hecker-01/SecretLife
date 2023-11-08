@@ -90,7 +90,7 @@ public class PlayerInteractEventListener implements Listener {
         Action action = event.getAction();
         if (action == Action.RIGHT_CLICK_BLOCK) {
             // Completed Button
-            if (location.getBlockX() == 2 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
+            if (location.getBlockX() == 3 && location.getBlockY() == 66 && location.getBlockZ() == 6 && block.getType().toString().contains("BUTTON")) {
 
                 long cooldownTime1 = 2000; // IN MILLISECONDS
 
@@ -99,7 +99,7 @@ public class PlayerInteractEventListener implements Listener {
                     CompletedButton(player, block);
                 }
             // Re-roll Button
-            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
+            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 6 && block.getType().toString().contains("BUTTON")) {
 
                 long cooldownTime2 = 2000; // IN MILLISECONDS
 
@@ -108,7 +108,7 @@ public class PlayerInteractEventListener implements Listener {
                     RerollButton(player, block);
                 }
             // Failed Button
-            } else if (location.getBlockX() == -2 && location.getBlockY() == 66 && location.getBlockZ() == 3 && block.getType().toString().contains("BUTTON")) {
+            } else if (location.getBlockX() == -3 && location.getBlockY() == 66 && location.getBlockZ() == 6 && block.getType().toString().contains("BUTTON")) {
 
                 long cooldownTime3 = 2000; // IN MILLISECONDS
 
@@ -117,7 +117,7 @@ public class PlayerInteractEventListener implements Listener {
                     FailedButton(player, block);
                 }
             // Info Button
-            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 7 && block.getType().toString().contains("BUTTON")) {
+            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == -5 && block.getType().toString().contains("BUTTON")) {
 
                 long cooldownTime4 = 2000; // IN MILLISECONDS
 
