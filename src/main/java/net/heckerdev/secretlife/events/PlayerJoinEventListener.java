@@ -5,6 +5,7 @@ import net.heckerdev.secretlife.utils.TextColor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -33,10 +34,12 @@ public class PlayerJoinEventListener implements Listener {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getMainScoreboard();
         AttributeInstance health = Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH));
-        Team team = Objects.requireNonNull(board.getTeam("3-Lives"));
-        team.addEntity(player);
+        Team threeLives = Objects.requireNonNull(board.getTeam("3-Lives"));
+        threeLives.addEntity(player);
         health.setBaseValue(60);
         player.setHealth(60);
+        player.setGameMode(GameMode.SURVIVAL);
+        player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation().add(0.5, 0, 0.5));
         player.sendMessage(Component.text("✔").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true).append(Component.text(" You've been set up and are ready to go!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, false)));
         player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "beenSetup"), PersistentDataType.BOOLEAN, true);
     }

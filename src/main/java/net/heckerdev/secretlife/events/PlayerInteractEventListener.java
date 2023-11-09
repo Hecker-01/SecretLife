@@ -117,7 +117,7 @@ public class PlayerInteractEventListener implements Listener {
                     FailedButton(player, block);
                 }
             // Info Button
-            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == -5 && block.getType().toString().contains("BUTTON")) {
+            } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == -6 && block.getType().toString().contains("BUTTON")) {
 
                 long cooldownTime4 = 2000; // IN MILLISECONDS
 

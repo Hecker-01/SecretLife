@@ -17,7 +17,7 @@ import java.util.Objects;
 
 @CommandAlias("reset")
 @Description("reset someone to full health and lives.")
-public class SetupCommand extends BaseCommand {
+public class ResetCommand extends BaseCommand {
 
     @Default
     @Syntax(" <player>")
@@ -55,7 +55,7 @@ public class SetupCommand extends BaseCommand {
         }
     }
     private final SecretLife plugin;
-    public SetupCommand(SecretLife plugin) {
+    public ResetCommand(SecretLife plugin) {
         this.plugin = plugin;
     }
 }

@@ -1,11 +1,12 @@
 package net.heckerdev.secretlife;
 
 import co.aikar.commands.PaperCommandManager;
-import net.heckerdev.secretlife.commands.*;
-import net.heckerdev.secretlife.events.*;
-import net.kyori.adventure.text.Component;
+import net.heckerdev.secretlife.commands.ResetCommand;
+import net.heckerdev.secretlife.events.EntityDamageEventListener;
+import net.heckerdev.secretlife.events.PlayerDeathEventListener;
+import net.heckerdev.secretlife.events.PlayerInteractEventListener;
+import net.heckerdev.secretlife.events.PlayerJoinEventListener;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -41,8 +42,7 @@ public final class SecretLife extends JavaPlugin {
     private void setupCommands() {
         // Registering commands.
         PaperCommandManager manager= new PaperCommandManager(this);
-        manager.registerCommand(new TestCommand(this));
-        manager.registerCommand(new SetupCommand(this));
+        manager.registerCommand(new ResetCommand(this));
     }
 
     private boolean setupPermissions() {
@@ -64,6 +64,7 @@ public final class SecretLife extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageEventListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathEventListener(), this);
     }
 
     private void setupTeams() {
@@ -71,17 +72,26 @@ public final class SecretLife extends JavaPlugin {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getMainScoreboard();
 
-        Team threeLives = board.registerNewTeam("3-Lives");
-        Team twoLives = board.registerNewTeam("2-Lives");
-        Team oneLife = board.registerNewTeam("1-life");
-
-        threeLives.color(NamedTextColor.GREEN);
-        twoLives.color(NamedTextColor.YELLOW);
-        oneLife.color(NamedTextColor.RED);
-
-        threeLives.prefix(Component.text("[3] ").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false));
-        twoLives.prefix(Component.text("[2] ").color(NamedTextColor.YELLOW).decoration(TextDecoration.BOLD, false));
-        oneLife.prefix(Component.text("[1] ").color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false));
+        if (board.getTeam("3-Lives") == null) {
+            Team threeLives = board.registerNewTeam("3-Lives");
+            threeLives.color(NamedTextColor.GREEN);
+            threeLives.setCanSeeFriendlyInvisibles(false);
+        }
+        if (board.getTeam("2-Lives") == null) {
+            Team twoLives = board.registerNewTeam("2-Lives");
+            twoLives.color(NamedTextColor.YELLOW);
+            twoLives.setCanSeeFriendlyInvisibles(false);
+        }
+        if (board.getTeam("1-Life") == null) {
+            Team oneLife = board.registerNewTeam("1-Life");
+            oneLife.color(NamedTextColor.RED);
+            oneLife.setCanSeeFriendlyInvisibles(false);
+        }
+        if (board.getTeam("Dead") == null) {
+            Team dead = board.registerNewTeam("Dead");
+            dead.color(NamedTextColor.DARK_GRAY);
+            dead.setCanSeeFriendlyInvisibles(true);
+        }
     }
 
     public static SecretLife getPlugin() {
