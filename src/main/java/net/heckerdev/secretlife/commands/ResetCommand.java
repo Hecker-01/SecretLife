@@ -6,7 +6,6 @@ import net.heckerdev.secretlife.SecretLife;
 import net.heckerdev.secretlife.events.PlayerJoinEventListener;
 import net.heckerdev.secretlife.utils.TextColor;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -41,7 +40,7 @@ public class ResetCommand extends BaseCommand {
                 noPerms(player);
             }
         } else {
-            sender.sendMessage(NamedTextColor.DARK_RED + "You can only execute this as a player!");
+            sender.sendMessage("You can only execute this as a player!");
         }
     }
 

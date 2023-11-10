@@ -19,5 +19,8 @@ messages:
   # Command messages
   command-no-permission: "&c⚠ You do not have permission to use this command!"
 
+items:
+  totem-custom-model-data: 1
+
 # File version (do NOT edit)
-file-version: 1.1
+file-version: 1.2

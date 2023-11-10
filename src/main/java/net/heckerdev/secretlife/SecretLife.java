@@ -1,11 +1,8 @@
 package net.heckerdev.secretlife;
 
 import co.aikar.commands.PaperCommandManager;
-import net.heckerdev.secretlife.commands.ResetCommand;
-import net.heckerdev.secretlife.events.EntityDamageEventListener;
-import net.heckerdev.secretlife.events.PlayerDeathEventListener;
-import net.heckerdev.secretlife.events.PlayerInteractEventListener;
-import net.heckerdev.secretlife.events.PlayerJoinEventListener;
+import net.heckerdev.secretlife.commands.*;
+import net.heckerdev.secretlife.events.*;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -43,6 +40,7 @@ public final class SecretLife extends JavaPlugin {
         // Registering commands.
         PaperCommandManager manager= new PaperCommandManager(this);
         manager.registerCommand(new ResetCommand(this));
+        manager.registerCommand(new TotemCommand(this));
     }
 
     private boolean setupPermissions() {
