@@ -5,10 +5,7 @@ import net.heckerdev.secretlife.buttons.CompletedButton;
 import net.heckerdev.secretlife.buttons.FailedButton;
 import net.heckerdev.secretlife.buttons.InfoButton;
 import net.heckerdev.secretlife.buttons.RerollButton;
-import net.heckerdev.secretlife.utils.TextColor;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -25,12 +22,10 @@ public class PlayerInteractEventListener implements Listener {
     public void CompletedButton(Player player, Block block) {
         String CompletedMessage = this.plugin.getConfig().getString("messages.completed-chat");
 
-        // Send message to player when the completed button is clicked.
-        // player.sendMessage(Component.text("✔ You clicked The Completed Button!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true));
         if (CompletedMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(CompletedMessage));
+            player.sendMessage(MiniMessage.miniMessage().deserialize(CompletedMessage));
         } else {
-            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Completed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Completed message isn't set up properly, please contact an admin!"));
         }
         // The other stuff is in the file below.
         CompletedButton.Pressed(player, block);
@@ -39,12 +34,10 @@ public class PlayerInteractEventListener implements Listener {
     public void FailedButton(Player player, Block block) {
         String FailedMessage = this.plugin.getConfig().getString("messages.failed-chat");
 
-        // Send message to player when the failed button is clicked.
-        // player.sendMessage(Component.text("❌ You clicked The Failed Button!").color(TextColor.DARK_RED).decoration(TextDecoration.BOLD, true));
         if (FailedMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(FailedMessage));
+            player.sendMessage(MiniMessage.miniMessage().deserialize(FailedMessage));
         } else {
-            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Failed message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
         }
         // The other stuff is in the file below.
         FailedButton.Pressed(player, block);
@@ -53,12 +46,10 @@ public class PlayerInteractEventListener implements Listener {
     public void InfoButton(Player player, Block block) {
         String InfoMessage = this.plugin.getConfig().getString("messages.info-chat");
 
-        // Send message to player when the info button is clicked.
-        // player.sendMessage(Component.text("ⓘ You clicked The Info Button!").color(TextColor.BLUE).decoration(TextDecoration.BOLD, true));
         if (InfoMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(InfoMessage));
+            player.sendMessage(MiniMessage.miniMessage().deserialize(InfoMessage));
         } else {
-            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Info message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Info message isn't set up properly, please contact an admin!"));
         }
         // The other stuff is in the file below.
         InfoButton.Pressed(player, block);
@@ -67,12 +58,10 @@ public class PlayerInteractEventListener implements Listener {
     public  void RerollButton(Player player, Block block) {
         String RerollMessage = this.plugin.getConfig().getString("messages.reroll-chat");
 
-        // Send message to player when the reroll button is clicked.
-        // player.sendMessage(Component.text("\uD83D\uDD01").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, false).append(Component.text(" You clicked The Reroll Button!").color(TextColor.DARK_GREEN).decoration(TextDecoration.BOLD, true)));
         if (RerollMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(RerollMessage));
+            player.sendMessage(MiniMessage.miniMessage().deserialize(RerollMessage));
         } else {
-            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Reroll message isn't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Reroll message isn't set up properly, please contact an admin!"));
         }
         // The other stuff is in the file below.
         RerollButton.Pressed(player, block);

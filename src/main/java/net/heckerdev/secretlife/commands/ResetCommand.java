@@ -4,10 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.heckerdev.secretlife.SecretLife;
 import net.heckerdev.secretlife.events.PlayerJoinEventListener;
-import net.heckerdev.secretlife.utils.TextColor;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -29,12 +26,12 @@ public class ResetCommand extends BaseCommand {
                     if (Bukkit.getPlayer(args[0]) != null) {
                         Player target = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
                         PlayerJoinEventListener.setupPlayer(target);
-                        player.sendMessage(Component.text("✔").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true).append(Component.text(" Reset " + target.getName() + " successfully!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, false)));
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> Reset " + target.getName() + " successfully!"));
                     } else {
-                        player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" " + args[0] + " is not a valid player! - Make sure the player is online!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)).append(Component.text(" Usage: /reset <player>").color(TextColor.GRAY).decoration(TextDecoration.BOLD, false)));
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> " + args[0] + " is not a valid player! - Make sure the player is online!<gray>  Usage: /reset <player>"));
                     }
                 } else {
-                    player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Usage: /reset <player>").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
+                    player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold>  Usage: /reset <player>"));
                 }
             } else {
                 noPerms(player);
@@ -48,10 +45,9 @@ public class ResetCommand extends BaseCommand {
         String noPermsMessage = this.plugin.getConfig().getString("messages.command-no-permission");
 
         if (noPermsMessage != null) {
-            player.sendMessage(LegacyComponentSerializer.legacy('&').deserialize(noPermsMessage));
+            player.sendMessage(MiniMessage.miniMessage().deserialize(noPermsMessage));
         } else {
-            player.sendMessage(Component.text("❌").color(TextColor.RED).decoration(TextDecoration.BOLD, true).append(Component.text(" Command messages aren't set up properly, please contact an admin!").color(TextColor.RED).decoration(TextDecoration.BOLD, false)));
-        }
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Command messages aren't set up properly, please contact an admin!"));        }
     }
     private final SecretLife plugin;
     public ResetCommand(SecretLife plugin) {

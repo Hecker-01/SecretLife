@@ -22,7 +22,7 @@ public final class SecretLife extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic.
         setupTeams();
-        saveDefaultConfig();
+        setupConfig();
         setupListeners();
         setupPermissions();
         setupCommands();
@@ -57,12 +57,27 @@ public final class SecretLife extends JavaPlugin {
         return perms != null;
     }
 
+    private void setupConfig() {
+        // Registering config.
+        saveDefaultConfig();
+        if (getConfig().getInt("file-version") < 1.4) {
+            getLogger().warning("Updating config.yml...");
+            saveResource("config.yml", true);
+            reloadConfig();
+            getLogger().info("Successfully updated config.yml!");
+            getLogger().warning("Please reconfigure the config.yml file, is has been reset!");
+        } else if (getConfig().getInt("file-version") > 1.4) {
+            getLogger().warning(" - Disabled because the config.yml is from a newer version!");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+    }
+
     private void setupListeners() {
         // Registering listeners.
         Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageEventListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerDeathEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathEventListener(this), this);
     }
 
     private void setupTeams() {

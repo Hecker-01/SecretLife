@@ -1,26 +1,37 @@
 # Config file for SecretLife
 messages:
   # Completed messages
-  completed-chat: "&a&l✔&r&a You clicked The Completed Button!"
-  completed-title: "&a&l✔&r&a Completed"
-  completed-subtitle: "&a&You clicked The Completed Button!"
+  completed-chat: "<green><bold>✔</bold> You clicked The Completed Button!"
+  completed-title: "<green><bold>✔</bold> Completed"
+  completed-subtitle: "<green>You clicked The Completed Button!"
   # Failed messages
-  failed-chat: "&4&l❌&r&4 You clicked The Failed Button!"
-  failed-title: "&4&l❌&r&4 Failed"
-  failed-subtitle: "&4&You clicked The Failed Button!"
+  failed-chat: "<dark_red><bold>❌</bold> You clicked The Failed Button!"
+  failed-title: "<dark_red><bold>❌</bold> Failed"
+  failed-subtitle: "<dark_red>You clicked The Failed Button!"
   # Info messages
-  info-chat: "&9&lⓘ&r&9 You clicked The Info Button!"
-  info-title: "&9&lⓘ&r&9 Info"
-  info-subtitle: "&9You clicked The Info Button!"
+  info-chat: "<blue><bold>ⓘ</bold> You clicked The Info Button!"
+  info-title: "<blue><bold>ⓘ</bold> Info"
+  info-subtitle: "<blue>You clicked The Info Button!"
   # Reroll messages
-  reroll-chat: "&2🔁 You clicked The Reroll Button!"
-  reroll-title: "&2🔁 Reroll"
-  reroll-subtitle: "&2You clicked The Reroll Button!"
+  reroll-chat: "<dark_green>🔁 You clicked The Reroll Button!"
+  reroll-title: "<dark_green>🔁 Reroll"
+  reroll-subtitle: "<dark_green>You clicked The Reroll Button!"
   # Command messages
-  command-no-permission: "&c⚠ You do not have permission to use this command!"
+  command-no-permission: "<red>⚠ You do not have permission to use this command!"
+  # Messages that are sent when the player respawns on a life
+  player-respawn-2-lives: "<yellow>You have died, and are now on 2 lives!"
+  player-respawn-1-life: "<red>You have died, and are now on 1 life!"
+  player-respawn-no-lives: "<dark_red>You have died, and are out of SecretLife!"
 
 items:
   totem-custom-model-data: 1
+  secret-book-custom-model-data: 1
+
+# Secrets, you can add as many as you want, and add {player} to choose a random player's name.
+secrets:
+  - "<green>test {player}"
+  - "<yellow>test2 {player}"
+  - "<gold>test{player}3"
 
 # File version (do NOT edit)
-file-version: 1.2
+file-version: 1.4

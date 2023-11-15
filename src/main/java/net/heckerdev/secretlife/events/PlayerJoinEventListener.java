@@ -1,9 +1,7 @@
 package net.heckerdev.secretlife.events;
 
 import net.heckerdev.secretlife.SecretLife;
-import net.heckerdev.secretlife.utils.TextColor;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
@@ -40,7 +38,7 @@ public class PlayerJoinEventListener implements Listener {
         player.setHealth(60);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation().add(0.5, 0, 0.5));
-        player.sendMessage(Component.text("✔").color(TextColor.GREEN).decoration(TextDecoration.BOLD, true).append(Component.text(" You've been set up and are ready to go!").color(TextColor.GREEN).decoration(TextDecoration.BOLD, false)));
+        player.sendMessage(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> You've been set up and are ready to go!"));
         player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "beenSetup"), PersistentDataType.BOOLEAN, true);
     }
 }
