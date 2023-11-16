@@ -40,7 +40,8 @@ public final class SecretLife extends JavaPlugin {
         // Registering commands.
         PaperCommandManager manager= new PaperCommandManager(this);
         manager.registerCommand(new ResetCommand(this));
-        manager.registerCommand(new TotemCommand(this));
+        manager.registerCommand(new StartSessionCommand(this));
+        manager.registerCommand(new GiftCommand(this));
     }
 
     private boolean setupPermissions() {

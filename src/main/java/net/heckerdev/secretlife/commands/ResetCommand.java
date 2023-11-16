@@ -6,8 +6,10 @@ import net.heckerdev.secretlife.SecretLife;
 import net.heckerdev.secretlife.events.PlayerJoinEventListener;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class ResetCommand extends BaseCommand {
                     if (Bukkit.getPlayer(args[0]) != null) {
                         Player target = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
                         PlayerJoinEventListener.setupPlayer(target);
+                        target.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
                         player.sendMessage(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> Reset " + target.getName() + " successfully!"));
                     } else {
                         player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> " + args[0] + " is not a valid player! - Make sure the player is online!<gray>  Usage: /reset <player>"));

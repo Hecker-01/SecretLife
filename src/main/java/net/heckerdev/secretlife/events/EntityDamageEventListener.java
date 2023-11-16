@@ -7,13 +7,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+import java.util.Objects;
+
 public class EntityDamageEventListener implements Listener{
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            AttributeInstance health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            AttributeInstance health = Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH));
             double currentHealth = health.getValue();
             double finalDamage = event.getFinalDamage();
             health.setBaseValue(currentHealth - finalDamage);
