@@ -1,4 +1,5 @@
 # Config file for SecretLife
+# all messages use MiniMessage format !(https://docs.advntr.dev/minimessage/)
 messages:
   # Completed messages
   completed-chat: "<green><bold>✔</bold> You clicked The Completed Button!"
