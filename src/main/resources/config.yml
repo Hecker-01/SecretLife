@@ -2,15 +2,12 @@
 # all messages use MiniMessage format !(https://docs.advntr.dev/minimessage/)
 messages:
   # Completed messages
-  completed-chat: ""
   completed-title: "<green><bold>✔</bold> You completed your secret task!"
   # Failed messages
-  failed-chat: ""
   failed-title: "<dark_red><bold>❌</bold> You failed your secret task!"
   # Info messages
-  info-chat: ""
+  info-chat: "<blue><bold>ⓘ</bold> Info coming soon!"
   # Reroll messages
-  reroll-chat: ""
   reroll-title: "<dark_green>🔁 Rerolling..."
   # Command messages
   command-no-permission: "<red>⚠ You do not have permission to use this command!"
@@ -34,4 +31,4 @@ reroll-secrets:
   - "<dark_red>test{player}3"
 
 # File version (do NOT edit)
-file-version: 1.4
+file-version: 1.5

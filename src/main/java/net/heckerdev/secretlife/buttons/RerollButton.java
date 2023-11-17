@@ -4,7 +4,9 @@ import net.heckerdev.secretlife.SecretLife;
 import net.heckerdev.secretlife.utils.ParticleColor;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.SoundStop;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.title.Title;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,14 +28,8 @@ public class RerollButton {
             return;
         }
         player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 2);
-
-        String RerollMessage = SecretLife.getPlugin().getConfig().getString("messages.reroll-chat");
-
-        if (RerollMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(RerollMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Reroll message isn't set up properly, please contact an admin!"));
-        }
+        String rerollTitle = SecretLife.getPlugin().getConfig().getString("messages.reroll-title");
+        Title title = Title.title(MiniMessage.miniMessage().deserialize(rerollTitle), Component.empty());
 
         // Spawn particles
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_GREEN, 1.5F);

@@ -26,43 +26,31 @@ public class FailedButton {
 
         // check what difficulty the player is on
         if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 1) {
-            String FailedMessage = SecretLife.getPlugin().getConfig().getString("messages.failed-chat");
-            if (FailedMessage != null) {
-                player.sendMessage(MiniMessage.miniMessage().deserialize(FailedMessage));
-            } else {
-                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-            }
             removeTasks(player);
             Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
             block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
             String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
-            if (FailedMessage != null) {
-                Title title = Title.title(MiniMessage.miniMessage().deserialize(FailedTitle), MiniMessage.miniMessage().deserialize("<red><bold>-15</bold> ❤"));
+            if (FailedTitle != null) {
+                Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-5</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
                 player.showTitle(title);
             } else {
                 player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-                Title title = Title.title(Component.empty(), MiniMessage.miniMessage().deserialize("<red><bold>-15</bold> ❤"));
+                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-5</bold> ❤"), Component.empty());
                 player.showTitle(title);
             }
             player.damage(10);
             player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
         } else if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 2) {
-            String FailedMessage = SecretLife.getPlugin().getConfig().getString("messages.failed-chat");
-            if (FailedMessage != null) {
-                player.sendMessage(MiniMessage.miniMessage().deserialize(FailedMessage));
-            } else {
-                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-            }
             removeTasks(player);
             Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
             block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
             String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
-            if (FailedMessage != null) {
-                Title title = Title.title(MiniMessage.miniMessage().deserialize(FailedTitle), MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"));
+            if (FailedTitle != null) {
+                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
                 player.showTitle(title);
             } else {
                 player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-                Title title = Title.title(Component.empty(), MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"));
+                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"), Component.empty());
                 player.showTitle(title);
             }
             player.damage(20);

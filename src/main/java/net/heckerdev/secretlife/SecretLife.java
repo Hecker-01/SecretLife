@@ -60,14 +60,16 @@ public final class SecretLife extends JavaPlugin {
 
     private void setupConfig() {
         // Registering config.
+        // Current version
+        double currentVersion = 1.5;
         saveDefaultConfig();
-        if (getConfig().getInt("file-version") < 1.4) {
+        if (getConfig().getDouble("file-version") < currentVersion) {
             getLogger().warning("Updating config.yml...");
             saveResource("config.yml", true);
             reloadConfig();
             getLogger().info("Successfully updated config.yml!");
             getLogger().warning("Please reconfigure the config.yml file, is has been reset!");
-        } else if (getConfig().getInt("file-version") > 1.4) {
+        } else if (getConfig().getDouble("file-version") > currentVersion) {
             getLogger().warning(" - Disabled because the config.yml is from a newer version!");
             getServer().getPluginManager().disablePlugin(this);
         }

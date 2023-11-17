@@ -13,17 +13,14 @@ import java.util.Objects;
 
 public class CompletedButton{
     public static void Pressed(Player player, Block block) {
-        String CompletedMessage = SecretLife.getPlugin().getConfig().getString("messages.completed-chat");
-        if (CompletedMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(CompletedMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Completed message isn't set up properly, please contact an admin!"));
-        }
-
         // Spawn particles
+        player.playSound(player, "minecraft:secretlife.pretotem", 1, 1);
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.GREEN, 1.5F);
         block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
         Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
-        Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 1.75);
+        Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 2);
+        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+
+        }, 25);
     }
 }
