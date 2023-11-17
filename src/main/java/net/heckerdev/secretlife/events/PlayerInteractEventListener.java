@@ -5,7 +5,6 @@ import net.heckerdev.secretlife.buttons.CompletedButton;
 import net.heckerdev.secretlife.buttons.FailedButton;
 import net.heckerdev.secretlife.buttons.InfoButton;
 import net.heckerdev.secretlife.buttons.RerollButton;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,56 +17,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerInteractEventListener implements Listener {
-
-    public void CompletedButton(Player player, Block block) {
-        String CompletedMessage = this.plugin.getConfig().getString("messages.completed-chat");
-
-        if (CompletedMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(CompletedMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Completed message isn't set up properly, please contact an admin!"));
-        }
-        // The other stuff is in the file below.
-        CompletedButton.Pressed(player, block);
-    }
-
-    public void FailedButton(Player player, Block block) {
-        String FailedMessage = this.plugin.getConfig().getString("messages.failed-chat");
-
-        if (FailedMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(FailedMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-        }
-        // The other stuff is in the file below.
-        FailedButton.Pressed(player, block);
-    }
-
-    public void InfoButton(Player player, Block block) {
-        String InfoMessage = this.plugin.getConfig().getString("messages.info-chat");
-
-        if (InfoMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(InfoMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Info message isn't set up properly, please contact an admin!"));
-        }
-        // The other stuff is in the file below.
-        InfoButton.Pressed(player, block);
-    }
-
-    public  void RerollButton(Player player, Block block) {
-        String RerollMessage = this.plugin.getConfig().getString("messages.reroll-chat");
-
-        if (RerollMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(RerollMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Reroll message isn't set up properly, please contact an admin!"));
-        }
-        // The other stuff is in the file below.
-        RerollButton.Pressed(player, block);
-    }
-
-
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -85,7 +34,7 @@ public class PlayerInteractEventListener implements Listener {
 
                 if (!this.cooldown1.containsKey(player.getUniqueId()) || ((this.cooldown1.get(player.getUniqueId())) + cooldownTime1) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown1.put(player.getUniqueId(), System.currentTimeMillis());
-                    CompletedButton(player, block);
+                    CompletedButton.Pressed(player, block);
                 }
             // Re-roll Button
             } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == 6 && block.getType().toString().contains("BUTTON")) {
@@ -94,7 +43,7 @@ public class PlayerInteractEventListener implements Listener {
 
                 if (!this.cooldown2.containsKey(player.getUniqueId()) || ((this.cooldown2.get(player.getUniqueId())) + cooldownTime2) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown2.put(player.getUniqueId(), System.currentTimeMillis());
-                    RerollButton(player, block);
+                    RerollButton.Pressed(player, block);
                 }
             // Failed Button
             } else if (location.getBlockX() == -3 && location.getBlockY() == 66 && location.getBlockZ() == 6 && block.getType().toString().contains("BUTTON")) {
@@ -103,7 +52,7 @@ public class PlayerInteractEventListener implements Listener {
 
                 if (!this.cooldown3.containsKey(player.getUniqueId()) || ((this.cooldown3.get(player.getUniqueId())) + cooldownTime3) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown3.put(player.getUniqueId(), System.currentTimeMillis());
-                    FailedButton(player, block);
+                    FailedButton.Pressed(player, block);
                 }
             // Info Button
             } else if (location.getBlockX() == 0 && location.getBlockY() == 66 && location.getBlockZ() == -6 && block.getType().toString().contains("BUTTON")) {
@@ -112,7 +61,7 @@ public class PlayerInteractEventListener implements Listener {
 
                 if (!this.cooldown4.containsKey(player.getUniqueId()) || ((this.cooldown4.get(player.getUniqueId())) + cooldownTime4) - (System.currentTimeMillis()) <= 0) {
                     this.cooldown4.put(player.getUniqueId(), System.currentTimeMillis());
-                    InfoButton(player, block);
+                    InfoButton.Pressed(player, block);
                 }
             }
         }

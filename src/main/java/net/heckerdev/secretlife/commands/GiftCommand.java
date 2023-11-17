@@ -49,7 +49,7 @@ public class GiftCommand extends BaseCommand {
                             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> " + args[0] + " is not a valid player! - Make sure the player is online!<gray>  Usage: /reset <player>"));
                         }
                     } else {
-                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold>  Usage: /gift <player>"));
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Usage: /gift <player>"));
                     }
                 } else {
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You've already used your gift for this session!"));

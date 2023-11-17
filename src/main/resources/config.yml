@@ -2,21 +2,16 @@
 # all messages use MiniMessage format !(https://docs.advntr.dev/minimessage/)
 messages:
   # Completed messages
-  completed-chat: "<green><bold>✔</bold> You clicked The Completed Button!"
-  completed-title: "<green><bold>✔</bold> Completed"
-  completed-subtitle: "<green>You clicked The Completed Button!"
+  completed-chat: ""
+  completed-title: "<green><bold>✔</bold> You completed your secret task!"
   # Failed messages
-  failed-chat: "<dark_red><bold>❌</bold> You clicked The Failed Button!"
-  failed-title: "<dark_red><bold>❌</bold> Failed"
-  failed-subtitle: "<dark_red>You clicked The Failed Button!"
+  failed-chat: ""
+  failed-title: "<dark_red><bold>❌</bold> You failed your secret task!"
   # Info messages
-  info-chat: "<blue><bold>ⓘ</bold> You clicked The Info Button!"
-  info-title: "<blue><bold>ⓘ</bold> Info"
-  info-subtitle: "<blue>You clicked The Info Button!"
+  info-chat: ""
   # Reroll messages
-  reroll-chat: "<dark_green>🔁 You clicked The Reroll Button!"
-  reroll-title: "<dark_green>🔁 Reroll"
-  reroll-subtitle: "<dark_green>You clicked The Reroll Button!"
+  reroll-chat: ""
+  reroll-title: "<dark_green>🔁 Rerolling..."
   # Command messages
   command-no-permission: "<red>⚠ You do not have permission to use this command!"
   # Messages that are sent when the player respawns on a life
@@ -33,6 +28,10 @@ secrets:
   - "<green>test {player}"
   - "<yellow>test2 {player}"
   - "<gold>test{player}3"
+reroll-secrets:
+  - "<dark_green>test {player}"
+  - "<dark_aqua>test2 {player}"
+  - "<dark_red>test{player}3"
 
 # File version (do NOT edit)
 file-version: 1.4

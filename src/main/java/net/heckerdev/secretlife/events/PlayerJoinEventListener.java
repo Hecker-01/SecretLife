@@ -29,6 +29,9 @@ public class PlayerJoinEventListener implements Listener {
         if (!player.getPersistentDataContainer().has(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN)) {
             player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
         }
+        if (!player.getPersistentDataContainer().has(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER)) {
+            player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
+        }
     }
 
     public static void setupPlayer(Player player) {

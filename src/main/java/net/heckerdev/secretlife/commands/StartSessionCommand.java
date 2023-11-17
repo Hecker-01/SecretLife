@@ -35,6 +35,7 @@ public class StartSessionCommand extends BaseCommand {
                     initialPlayer.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
                 }
                 Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 1);
                     Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
                     for (Player p : players) {
                         ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
