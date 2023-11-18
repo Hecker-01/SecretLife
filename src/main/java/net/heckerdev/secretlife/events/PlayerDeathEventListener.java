@@ -60,7 +60,7 @@ public class PlayerDeathEventListener implements Listener {
                 health.setBaseValue(60);
                 player.setHealth(60);
             } else if (team.getName().equals("1-Life")) {
-                String message = this.plugin.getConfig().getString("messages.player-respawn-1-lif");
+                String message = this.plugin.getConfig().getString("messages.player-respawn-1-life");
                 if (message == null) {
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Messages aren't set up properly, please contact an admin!"));
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red>But you now only have 1 life left"));
