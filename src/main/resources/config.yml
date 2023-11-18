@@ -17,8 +17,11 @@ messages:
   player-respawn-no-lives: "<dark_red>You have died, and are out of SecretLife!"
 
 items:
-  totem-custom-model-data: 1
+  secret-totem-custom-model-data: 1
+  reroll-secret-totem-custom-model-data: 2
+  heart-totem-custom-model-data: 3
   secret-book-custom-model-data: 1
+  reroll-secret-book-custom-model-data: 2
 
 # Secrets, you can add as many as you want, and add {player} to choose a random player's name.
 secrets:
@@ -31,4 +34,4 @@ reroll-secrets:
   - "<dark_red>test{player}3"
 
 # File version (do NOT edit)
-file-version: 1.5
+file-version: 1.6

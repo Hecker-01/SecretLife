@@ -3,8 +3,6 @@ package net.heckerdev.secretlife.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import net.heckerdev.secretlife.SecretLife;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.sound.SoundStop;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
@@ -40,7 +38,7 @@ public class StartSessionCommand extends BaseCommand {
                     for (Player p : players) {
                         ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
                         ItemMeta meta = totem.getItemMeta();
-                        meta.setCustomModelData(this.plugin.getConfig().getInt("items.totem-custom-model-data"));
+                        meta.setCustomModelData(this.plugin.getConfig().getInt("items.secret-totem-custom-model-data"));
                         totem.setItemMeta(meta);
 
                         p.playSound(p, "minecraft:secretlife.secret", 1, 1);
@@ -49,18 +47,14 @@ public class StartSessionCommand extends BaseCommand {
                             ItemStack mainHand = inventory.getItemInMainHand();
                             inventory.setItemInMainHand(totem);
                             p.playEffect(EntityEffect.TOTEM_RESURRECT);
-                            p.stopSound(SoundStop.named(Key.key("item.totem.use")));
                             inventory.setItemInMainHand(mainHand);
-                            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
-                                p.stopSound(SoundStop.named(Key.key("item.totem.use")));
-                            }, 1);
                         }, 25);
                         Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
                             p.playSound(p, "minecraft:entity.item.pickup", 1, 1);
                             giveSecret(p);
                         }, 62);
                     }
-                }, 200);
+                }, 60);
             } else {
                 noPerms(player);
             }

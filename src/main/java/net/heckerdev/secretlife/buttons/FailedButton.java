@@ -5,14 +5,12 @@ import net.heckerdev.secretlife.utils.ParticleColor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
-import org.bukkit.Material;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
@@ -23,55 +21,50 @@ public class FailedButton {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You don't have a secret task!"));
             return;
         }
+        Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
+        block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
 
-        // check what difficulty the player is on
-        if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 1) {
-            removeTasks(player);
-            Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
-            block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
-            String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
-            if (FailedTitle != null) {
-                Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-5</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
-                player.showTitle(title);
-            } else {
-                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-5</bold> ❤"), Component.empty());
-                player.showTitle(title);
-            }
-            player.damage(10);
-            player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
-        } else if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 2) {
-            removeTasks(player);
-            Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
-            block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
-            String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
-            if (FailedTitle != null) {
-                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
-                player.showTitle(title);
-            } else {
-                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
-                Title title = Title.title(MiniMessage.miniMessage().deserialize("<red><bold>-10</bold> ❤"), Component.empty());
-                player.showTitle(title);
-            }
-            player.damage(20);
-            player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
-        }
-    }
-
-    private static void removeTasks(Player player) {
-        PlayerInventory inventory = player.getInventory();
-        ItemStack[] contents = inventory.getContents();
-        for (ItemStack item : contents) {
-            if (item != null) {
-                if (item.getType() == Material.WRITTEN_BOOK) {
-                    BookMeta meta = (BookMeta) item.getItemMeta();
-                    if (meta != null) {
-                        if (Objects.requireNonNull(meta.getTitle()).contains("Secret Task")) {
-                            inventory.remove(item);
-                        }
+        Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
+        Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 50);
+        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+            if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 1) {
+                CompletedButton.removeTasks(player);
+                player.playSound(block.getLocation(), "minecraft:secretlife.fail", 1, 1);
+                Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+                    String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
+                    if (FailedTitle != null) {
+                        Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-5</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
+                        player.showTitle(title);
+                    } else {
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
+                        Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-5</bold> ❤"), Component.empty());
+                        player.showTitle(title);
                     }
-                }
+                    player.damage(10);
+                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
+                }, 25);
+            } else if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 2) {
+                CompletedButton.removeTasks(player);
+                player.playSound(block.getLocation(), "minecraft:secretlife.fail", 1, 1);
+                Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+                    String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
+                    if (FailedTitle != null) {
+                        Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-10</bold> ❤"), MiniMessage.miniMessage().deserialize(FailedTitle));
+                        player.showTitle(title);
+                    } else {
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Failed message isn't set up properly, please contact an admin!"));
+                        Title title = Title.title(MiniMessage.miniMessage().deserialize("<dark_red><bold>-10</bold> ❤"), Component.empty());
+                        player.showTitle(title);
+                    }
+                    player.damage(20);
+                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
+                }, 24);
             }
-        }
+        }, 16);
+        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+            Particle.DustOptions failDustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 3F);
+            Location failParticleLocation = new Location(block.getWorld(), 0.5, 69.0, 11.5);
+            Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.REDSTONE, failParticleLocation, 25, failDustOptions);
+        }, 40);
     }
 }

@@ -61,7 +61,7 @@ public final class SecretLife extends JavaPlugin {
     private void setupConfig() {
         // Registering config.
         // Current version
-        double currentVersion = 1.5;
+        double currentVersion = 1.6;
         saveDefaultConfig();
         if (getConfig().getDouble("file-version") < currentVersion) {
             getLogger().warning("Updating config.yml...");

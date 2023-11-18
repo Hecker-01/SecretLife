@@ -2,8 +2,6 @@ package net.heckerdev.secretlife.buttons;
 
 import net.heckerdev.secretlife.SecretLife;
 import net.heckerdev.secretlife.utils.ParticleColor;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.sound.SoundStop;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
@@ -27,53 +25,42 @@ public class RerollButton {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You don't have a secret task!"));
             return;
         }
+
+
         player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 2);
         String rerollTitle = SecretLife.getPlugin().getConfig().getString("messages.reroll-title");
-        Title title = Title.title(MiniMessage.miniMessage().deserialize(rerollTitle), Component.empty());
+        if (rerollTitle != null) {
+            Title title = Title.title(MiniMessage.miniMessage().deserialize(rerollTitle), Component.empty());
+            player.showTitle(title);
+        } else {
+            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Reroll title isn't set up properly, please contact an admin!"));
+        }
 
         // Spawn particles
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_GREEN, 1.5F);
         block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
-
-        ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
-        ItemMeta totemItemMeta = totem.getItemMeta();
-        totemItemMeta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.totem-custom-model-data"));
-        totem.setItemMeta(totemItemMeta);
-        removeTasks(player);
-
-        player.playSound(player, "minecraft:secretlife.secret", 1, 1);
+        Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
+        Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 50);
         Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-            PlayerInventory inventory = player.getInventory();
-            ItemStack mainHand = inventory.getItemInMainHand();
-            inventory.setItemInMainHand(totem);
-            player.playEffect(EntityEffect.TOTEM_RESURRECT);
-            player.stopSound(SoundStop.named(Key.key("item.totem.use")));
-            inventory.setItemInMainHand(mainHand);
+            player.playSound(player, "minecraft:secretlife.secret", 1, 1);
             Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-                player.stopSound(SoundStop.named(Key.key("item.totem.use")));
-            }, 1);
-        }, 25);
-        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-            player.playSound(player, "minecraft:entity.item.pickup", 1, 1);
-            giveReroll(player);
-        }, 62);
-    }
+                ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+                ItemMeta totemItemMeta = totem.getItemMeta();
+                totemItemMeta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.reroll-secret-totem-custom-model-data"));
+                totem.setItemMeta(totemItemMeta);
+                CompletedButton.removeTasks(player);
+                PlayerInventory inventory = player.getInventory();
+                ItemStack mainHand = inventory.getItemInMainHand();
+                inventory.setItemInMainHand(totem);
+                player.playEffect(EntityEffect.TOTEM_RESURRECT);
+                inventory.setItemInMainHand(mainHand);
+            }, 24);
+            Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+                player.playSound(player, "minecraft:entity.item.pickup", 1, 1);
+                giveReroll(player);
+            }, 62);
+        }, 16);
 
-    private static void removeTasks(Player player) {
-        PlayerInventory inventory = player.getInventory();
-        ItemStack[] contents = inventory.getContents();
-        for (ItemStack item : contents) {
-            if (item != null) {
-                if (item.getType() == Material.WRITTEN_BOOK) {
-                    BookMeta meta = (BookMeta) item.getItemMeta();
-                    if (meta != null) {
-                        if (Objects.requireNonNull(meta.getTitle()).contains("Secret Task")) {
-                            inventory.remove(item);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private static void giveReroll(Player player) {
@@ -89,7 +76,7 @@ public class RerollButton {
         meta.addPages(MiniMessage.miniMessage().deserialize(secret));
         meta.setAuthor("The Secret Keeper");
         meta.setGeneration(BookMeta.Generation.ORIGINAL);
-        meta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.secret-book-custom-model-data"));
+        meta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.reroll-secret-book-custom-model-data"));
         secretBook.setItemMeta(meta);
         player.getInventory().addItem(secretBook);
     }
