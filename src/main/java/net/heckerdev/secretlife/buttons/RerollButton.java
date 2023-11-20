@@ -25,9 +25,8 @@ public class RerollButton {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You don't have a secret task!"));
             return;
         }
-
-
-        player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 2);
+        CompletedButton.removeTasks(player);
+        player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
         String rerollTitle = SecretLife.getPlugin().getConfig().getString("messages.reroll-title");
         if (rerollTitle != null) {
             Title title = Title.title(MiniMessage.miniMessage().deserialize(rerollTitle), Component.empty());
@@ -42,13 +41,12 @@ public class RerollButton {
         Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
         Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 50);
         Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-            player.playSound(player, "minecraft:secretlife.secret", 1, 1);
+            player.playSound(block.getLocation(), "minecraft:secretlife.secret", 1, 1);
             Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                 ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
                 ItemMeta totemItemMeta = totem.getItemMeta();
                 totemItemMeta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.reroll-secret-totem-custom-model-data"));
                 totem.setItemMeta(totemItemMeta);
-                CompletedButton.removeTasks(player);
                 PlayerInventory inventory = player.getInventory();
                 ItemStack mainHand = inventory.getItemInMainHand();
                 inventory.setItemInMainHand(totem);
@@ -58,9 +56,14 @@ public class RerollButton {
             Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                 player.playSound(player, "minecraft:entity.item.pickup", 1, 1);
                 giveReroll(player);
+                player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 2);
             }, 62);
         }, 16);
-
+        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
+            Particle.DustOptions rerollDustOptions = new Particle.DustOptions(ParticleColor.DARK_GREEN, 3F);
+            Location rerollParticleLocation = new Location(block.getWorld(), 0.5, 69.0, 11.5);
+            Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.REDSTONE, rerollParticleLocation, 25, rerollDustOptions);
+        }, 40);
     }
 
     private static void giveReroll(Player player) {

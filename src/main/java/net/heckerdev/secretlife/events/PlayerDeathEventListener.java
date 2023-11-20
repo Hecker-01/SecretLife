@@ -49,7 +49,7 @@ public class PlayerDeathEventListener implements Listener {
         Team team = board.getEntityTeam(player);
         if (team != null) {
             if (team.getName().equals("2-Lives")) {
-                String message = this.plugin.getConfig().getString("messages.player-respawn-2-lives");
+                String message = SecretLife.getPlugin().getConfig().getString("messages.player-respawn-2-lives");
                 if (message == null) {
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Messages aren't set up properly, please contact an admin!"));
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<yellow>But you now only have 2 lives left"));
@@ -60,7 +60,7 @@ public class PlayerDeathEventListener implements Listener {
                 health.setBaseValue(60);
                 player.setHealth(60);
             } else if (team.getName().equals("1-Life")) {
-                String message = this.plugin.getConfig().getString("messages.player-respawn-1-life");
+                String message = SecretLife.getPlugin().getConfig().getString("messages.player-respawn-1-life");
                 if (message == null) {
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Messages aren't set up properly, please contact an admin!"));
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red>But you now only have 1 life left"));
@@ -71,7 +71,7 @@ public class PlayerDeathEventListener implements Listener {
                 health.setBaseValue(60);
                 player.setHealth(60);
             } else if (team.getName().equals("Dead")) {
-                String message = this.plugin.getConfig().getString("messages.player-respawn-no-lives");
+                String message = SecretLife.getPlugin().getConfig().getString("messages.player-respawn-no-lives");
                 if (message == null) {
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Messages aren't set up properly, please contact an admin!"));
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<dark_red>But you have died"));
@@ -85,10 +85,5 @@ public class PlayerDeathEventListener implements Listener {
                 }, 1L);
             }
         }
-    }
-
-    private final SecretLife plugin;
-    public PlayerDeathEventListener(SecretLife plugin) {
-        this.plugin = plugin;
     }
 }

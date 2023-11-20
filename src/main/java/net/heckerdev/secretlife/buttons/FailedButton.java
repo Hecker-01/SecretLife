@@ -17,18 +17,20 @@ import java.util.Objects;
 
 public class FailedButton {
     public static void Pressed(Player player, Block block) {
-        if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 0) {
+        int taskDifficulty = player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
+        if (taskDifficulty == 0) {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You don't have a secret task!"));
             return;
         }
+        player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
+        CompletedButton.removeTasks(player);
         Particle.DustOptions dustOptions = new Particle.DustOptions(ParticleColor.DARK_RED, 1.5F);
         block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
 
         Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
         Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 50);
         Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-            if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 1) {
-                CompletedButton.removeTasks(player);
+            if (taskDifficulty == 1) {
                 player.playSound(block.getLocation(), "minecraft:secretlife.fail", 1, 1);
                 Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                     String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
@@ -41,10 +43,8 @@ public class FailedButton {
                         player.showTitle(title);
                     }
                     player.damage(10);
-                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
                 }, 25);
-            } else if (player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0) == 2) {
-                CompletedButton.removeTasks(player);
+            } else if (taskDifficulty == 2) {
                 player.playSound(block.getLocation(), "minecraft:secretlife.fail", 1, 1);
                 Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                     String FailedTitle = SecretLife.getPlugin().getConfig().getString("messages.failed-title");
@@ -57,7 +57,6 @@ public class FailedButton {
                         player.showTitle(title);
                     }
                     player.damage(20);
-                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 0);
                 }, 24);
             }
         }, 16);

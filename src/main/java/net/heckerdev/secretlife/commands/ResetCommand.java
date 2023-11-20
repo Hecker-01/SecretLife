@@ -48,15 +48,11 @@ public class ResetCommand extends BaseCommand {
     }
 
     private void noPerms(Player player) {
-        String noPermsMessage = this.plugin.getConfig().getString("messages.command-no-permission");
+        String noPermsMessage = SecretLife.getPlugin().getConfig().getString("messages.command-no-permission");
 
         if (noPermsMessage != null) {
             player.sendMessage(MiniMessage.miniMessage().deserialize(noPermsMessage));
         } else {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Command messages aren't set up properly, please contact an admin!"));        }
-    }
-    private final SecretLife plugin;
-    public ResetCommand(SecretLife plugin) {
-        this.plugin = plugin;
     }
 }

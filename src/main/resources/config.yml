@@ -1,14 +1,14 @@
 # Config file for SecretLife
 # all messages use MiniMessage format !(https://docs.advntr.dev/minimessage/)
 messages:
-  # Completed messages
+  # Completed message
   completed-title: "<green><bold>✔</bold> You completed your secret task!"
-  # Failed messages
+  # Failed message
   failed-title: "<dark_red><bold>❌</bold> You failed your secret task!"
-  # Info messages
-  info-chat: "<blue><bold>ⓘ</bold> Info coming soon!"
-  # Reroll messages
+  # Reroll message
   reroll-title: "<dark_green>🔁 Rerolling..."
+  # Info message
+  info-chat: "<blue><bold>ⓘ</bold> Info coming soon!<br><gray>Edit this message in the config.yml file!"
   # Command messages
   command-no-permission: "<red>⚠ You do not have permission to use this command!"
   # Messages that are sent when the player respawns on a life
@@ -25,13 +25,11 @@ items:
 
 # Secrets, you can add as many as you want, and add {player} to choose a random player's name.
 secrets:
-  - "<green>test {player}"
-  - "<yellow>test2 {player}"
-  - "<gold>test{player}3"
+  - "<green>Secret 1"
+  - "<bold>{player}</bold> Secret 2"
 reroll-secrets:
-  - "<dark_green>test {player}"
-  - "<dark_aqua>test2 {player}"
-  - "<dark_red>test{player}3"
+  - "<dark_green>Hard secret"
+  - "<underlined>{player}</underlined> Hard Secret 2"
 
 # File version (do NOT edit)
-file-version: 1.6
+file-version: 1.0

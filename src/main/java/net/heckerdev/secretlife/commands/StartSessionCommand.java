@@ -32,26 +32,26 @@ public class StartSessionCommand extends BaseCommand {
                 for (Player initialPlayer : initialPlayers) {
                     initialPlayer.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
                 }
-                Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
-                    player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 1);
+                Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                     Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
                     for (Player p : players) {
                         ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
                         ItemMeta meta = totem.getItemMeta();
-                        meta.setCustomModelData(this.plugin.getConfig().getInt("items.secret-totem-custom-model-data"));
+                        meta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.secret-totem-custom-model-data"));
                         totem.setItemMeta(meta);
 
                         p.playSound(p, "minecraft:secretlife.secret", 1, 1);
-                        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+                        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                             PlayerInventory inventory = p.getInventory();
                             ItemStack mainHand = inventory.getItemInMainHand();
                             inventory.setItemInMainHand(totem);
                             p.playEffect(EntityEffect.TOTEM_RESURRECT);
                             inventory.setItemInMainHand(mainHand);
                         }, 25);
-                        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+                        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
                             p.playSound(p, "minecraft:entity.item.pickup", 1, 1);
                             giveSecret(p);
+                            p.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "secretDifficulty"), PersistentDataType.INTEGER, 1);
                         }, 62);
                     }
                 }, 60);
@@ -64,7 +64,7 @@ public class StartSessionCommand extends BaseCommand {
     }
 
     private void noPerms(Player player) {
-        String noPermsMessage = this.plugin.getConfig().getString("messages.command-no-permission");
+        String noPermsMessage = SecretLife.getPlugin().getConfig().getString("messages.command-no-permission");
 
         if (noPermsMessage != null) {
             player.sendMessage(MiniMessage.miniMessage().deserialize(noPermsMessage));
@@ -72,13 +72,8 @@ public class StartSessionCommand extends BaseCommand {
             player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Command messages aren't set up properly, please contact an admin!"));        }
     }
 
-    private final SecretLife plugin;
-    public StartSessionCommand(SecretLife plugin) {
-        this.plugin = plugin;
-    }
-
     private void giveSecret(Player player) {
-        String[] secrets = this.plugin.getConfig().getStringList("secrets").toArray(new String[0]);
+        String[] secrets = SecretLife.getPlugin().getConfig().getStringList("secrets").toArray(new String[0]);
         int randomSecrets = (int) (Math.random() * secrets.length);
         Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[0]);
         int randomPlayers = (int) (Math.random() * players.length);
@@ -90,7 +85,7 @@ public class StartSessionCommand extends BaseCommand {
         meta.addPages(MiniMessage.miniMessage().deserialize(secret));
         meta.setAuthor("The Secret Keeper");
         meta.setGeneration(BookMeta.Generation.ORIGINAL);
-        meta.setCustomModelData(this.plugin.getConfig().getInt("items.secret-book-custom-model-data"));
+        meta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.secret-book-custom-model-data"));
         secretBook.setItemMeta(meta);
         player.getInventory().addItem(secretBook);
     }

@@ -31,64 +31,46 @@ public class GiftCommand extends BaseCommand {
     public void onDefault(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("secretlife.command.gift")) {
-                Boolean usedGift = player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
-                if (!usedGift) {
-                    if (!(args.length == 0) && Bukkit.getPlayer(args[0]) != null) {
-                        if (Bukkit.getPlayer(args[0]) != null) {
-                            if (Objects.equals(args[0], player.getName())) {
-                                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You can't gift yourself!"));
-                            } else {
-                                Player target = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
-                                player.sendMessage(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> Successfully gave " + target.getName() + " a heart!"));
-                                AttributeInstance health = Objects.requireNonNull(target.getAttribute(Attribute.GENERIC_MAX_HEALTH));
-                                double currentHealth = health.getValue();
-                                if (currentHealth <= 30) {
-                                    health.setBaseValue(currentHealth + 2);
-                                    target.setHealth(currentHealth + 2);
-                                }
-                                target.playSound(target, "minecraft:entity.player.levelup", 1, 1);
-                                player.playSound(player, "minecraft:entity.experience_orb.pickup", 1, 1);
-                                ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
-                                ItemMeta totemItemMeta = totem.getItemMeta();
-                                totemItemMeta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.heart-totem-custom-model-data"));
-                                totem.setItemMeta(totemItemMeta);
-                                PlayerInventory inventory = target.getInventory();
-                                ItemStack mainHand = inventory.getItemInMainHand();
-                                inventory.setItemInMainHand(totem);
-                                target.playEffect(EntityEffect.TOTEM_RESURRECT);
-                                inventory.setItemInMainHand(mainHand);
-                                Title title = Title.title(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> " + player.getName() + " gave you a heart!"), Component.empty());
-                                target.showTitle(title);
-                                player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, true);
-                            }
+            Boolean usedGift = player.getPersistentDataContainer().getOrDefault(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, false);
+            if (!usedGift) {
+                if (!(args.length == 0) && Bukkit.getPlayer(args[0]) != null) {
+                    if (Bukkit.getPlayer(args[0]) != null) {
+                        if (Objects.equals(args[0], player.getName())) {
+                            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You can't gift yourself!"));
                         } else {
-                            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> " + args[0] + " is not a valid player! - Make sure the player is online!<gray>  Usage: /reset <player>"));
+                            Player target = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
+                            player.sendMessage(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> Successfully gave " + target.getName() + " a heart!"));
+                            AttributeInstance health = Objects.requireNonNull(target.getAttribute(Attribute.GENERIC_MAX_HEALTH));
+                            double currentHealth = health.getValue();
+                            if (currentHealth <= 30) {
+                                health.setBaseValue(currentHealth + 2);
+                                target.setHealth(currentHealth + 2);
+                            }
+                            target.playSound(target.getLocation(), "minecraft:entity.player.levelup", 1, 1);
+                            ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+                            ItemMeta totemItemMeta = totem.getItemMeta();
+                            totemItemMeta.setCustomModelData(SecretLife.getPlugin().getConfig().getInt("items.heart-totem-custom-model-data"));
+                            totem.setItemMeta(totemItemMeta);
+                            PlayerInventory inventory = target.getInventory();
+                            ItemStack mainHand = inventory.getItemInMainHand();
+                            inventory.setItemInMainHand(totem);
+                            target.playEffect(EntityEffect.TOTEM_RESURRECT);
+                            inventory.setItemInMainHand(mainHand);
+                            Title title = Title.title(MiniMessage.miniMessage().deserialize("<green><bold>✔</bold> " + player.getName() + " gave you a heart!"), Component.empty());
+                            target.showTitle(title);
+                            player.getPersistentDataContainer().set(new NamespacedKey(SecretLife.getPlugin(), "usedGift"), PersistentDataType.BOOLEAN, true);
                         }
                     } else {
-                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Usage: /gift <player>"));
+                        player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> " + args[0] + " is not a valid player! - Make sure the player is online!<gray>  Usage: /reset <player>"));
                     }
                 } else {
-                    player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You've already used your gift for this session!"));
+                    player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Usage: /gift <player>"));
                 }
             } else {
-                noPerms(player);
+                player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> You've already used your gift for this session!"));
             }
         } else {
             sender.sendMessage("You can only execute this as a player!");
         }
-    }
-
-    private void noPerms(Player player) {
-        String noPermsMessage = this.plugin.getConfig().getString("messages.command-no-permission");
-
-        if (noPermsMessage != null) {
-            player.sendMessage(MiniMessage.miniMessage().deserialize(noPermsMessage));
-        } else {
-            player.sendMessage(MiniMessage.miniMessage().deserialize("<red><bold>❌</bold> Command messages aren't set up properly, please contact an admin!"));        }
-    }
-    private final SecretLife plugin;
-    public GiftCommand(SecretLife plugin) {
-        this.plugin = plugin;
     }
 }

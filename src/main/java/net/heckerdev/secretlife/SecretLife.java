@@ -39,9 +39,9 @@ public final class SecretLife extends JavaPlugin {
     private void setupCommands() {
         // Registering commands.
         PaperCommandManager manager= new PaperCommandManager(this);
-        manager.registerCommand(new ResetCommand(this));
-        manager.registerCommand(new StartSessionCommand(this));
-        manager.registerCommand(new GiftCommand(this));
+        manager.registerCommand(new ResetCommand());
+        manager.registerCommand(new StartSessionCommand());
+        manager.registerCommand(new GiftCommand());
     }
 
     private boolean setupPermissions() {
@@ -61,7 +61,7 @@ public final class SecretLife extends JavaPlugin {
     private void setupConfig() {
         // Registering config.
         // Current version
-        double currentVersion = 1.6;
+        double currentVersion = 1.0;
         saveDefaultConfig();
         if (getConfig().getDouble("file-version") < currentVersion) {
             getLogger().warning("Updating config.yml...");
@@ -77,10 +77,10 @@ public final class SecretLife extends JavaPlugin {
 
     private void setupListeners() {
         // Registering listeners.
-        Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractEventListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageEventListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerDeathEventListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathEventListener(), this);
     }
 
     private void setupTeams() {
