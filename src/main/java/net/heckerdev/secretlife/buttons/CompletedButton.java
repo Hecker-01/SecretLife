@@ -127,7 +127,7 @@ public class CompletedButton{
                     EnchantmentStorageMeta rewardItemMeta8 = (EnchantmentStorageMeta) rewardItem8.getItemMeta();
                     rewardItemMeta8.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
                     rewardItemMeta8.removeStoredEnchant(Enchantment.PROTECTION_FALL);
-                    rewardItem3.setItemMeta(rewardItemMeta8);
+                    rewardItem8.setItemMeta(rewardItemMeta8);
 
                     ItemStack rewardItem9 = new ItemStack(Material.ANCIENT_DEBRIS);
 
