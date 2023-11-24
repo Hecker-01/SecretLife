@@ -141,7 +141,7 @@ public class CompletedButton{
                     ItemStack rewardItem12 = new ItemStack(Material.BOOK);
                     rewardItem12.setAmount(3);
 
-                    ItemStack rewardItem14 = new ItemStack(Material.SKELETON_SPAWN_EGG);
+                    ItemStack rewardItem14 = new ItemStack(Material.SKELETON_HORSE_SPAWN_EGG);
 
                     ItemStack rewardItem15 = new ItemStack(Material.ZOMBIE_SPAWN_EGG);
 

@@ -6,7 +6,7 @@
 
     <groupId>net.heckerdev</groupId>
     <artifactId>SecretLife</artifactId>
-    <version>0.9</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>SecretLife</name>
