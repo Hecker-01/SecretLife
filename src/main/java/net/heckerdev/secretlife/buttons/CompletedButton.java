@@ -35,9 +35,7 @@ public class CompletedButton{
         block.getWorld().spawnParticle(Particle.REDSTONE, block.getLocation().add(0.5, 1.0, 0.5), 25, dustOptions);
         Location enchantParticleLocation = new Location(block.getWorld(), 0.5, 70.2, 11.5);
         Objects.requireNonNull(Bukkit.getWorld("world")).spawnParticle(Particle.ENCHANTMENT_TABLE, enchantParticleLocation, 5000, 0, 0, 0, 50);
-        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
-            player.playSound(block.getLocation(), "minecraft:secretlife.complete", 1, 1);
-        }, 16);
+        Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> player.playSound(block.getLocation(), "minecraft:secretlife.complete", 1, 1), 16);
         Bukkit.getScheduler().runTaskLater(SecretLife.getPlugin(), () -> {
             Particle.DustOptions completeDustOptions = new Particle.DustOptions(ParticleColor.GREEN, 2F);
             Location completeParticleLocation = new Location(block.getWorld(), 0.5, 69.0, 11.5);
@@ -98,7 +96,7 @@ public class CompletedButton{
                     }
                 }
                 if (restReward <= 0) {
-                    return;
+                    String skip;
                 } else {
 
                     ItemStack rewardItem1 = new ItemStack(Material.GOLDEN_APPLE);
@@ -194,7 +192,7 @@ public class CompletedButton{
                     if (meta != null) {
                         String bookTitle = meta.getTitle();
                         if (bookTitle == null) {
-                            String skip = "";
+                            String skip;
                         } else if (bookTitle.contains("Secret Task")) {
                             inventory.remove(item);
                         }
